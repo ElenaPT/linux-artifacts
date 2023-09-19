@@ -1,7 +1,6 @@
 use std::path::{PathBuf, Path};
 
 use forensic_rs::{traits::vfs::VirtualFileSystem, prelude::ForensicResult};
-
 pub struct ChRootFileSystem {
     path : PathBuf,
     fs : Box<dyn VirtualFileSystem>
@@ -50,5 +49,24 @@ impl VirtualFileSystem for ChRootFileSystem {
 
     fn read_dir(&mut self, path: &Path) -> ForensicResult<Vec<forensic_rs::traits::vfs::VDirEntry>> {
         self.fs.read_dir(self.path.join(strip_prefix(path)).as_path())
+    }
+
+    fn from_file(&self, _file : Box<dyn forensic_rs::traits::vfs::VirtualFile>) -> ForensicResult<Box<dyn VirtualFileSystem>> {
+        todo!()
+    }
+
+    fn from_fs(&self, _fs : Box<dyn VirtualFileSystem>) -> ForensicResult<Box<dyn VirtualFileSystem>> {
+        todo!()
+    }
+
+    fn open(&mut self, path : &Path) -> ForensicResult<Box<dyn forensic_rs::traits::vfs::VirtualFile>> {
+        self.fs.open(path)
+    }
+
+    fn duplicate(&self) -> Box<dyn VirtualFileSystem> {
+        Box::new(Self {
+            path : self.path.clone(),
+            fs : self.fs.duplicate()
+        })
     }
 }
