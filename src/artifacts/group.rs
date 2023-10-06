@@ -1,3 +1,4 @@
+//use forensic_rs::traits::forensic::Forensicable;
 pub use forensic_rs::{traits::vfs::VirtualFileSystem, prelude::ForensicResult, core::fs::StdVirtualFS};
 pub use std::{
     io::BufRead, path::{Path, PathBuf},
@@ -17,6 +18,16 @@ pub struct Group {
 pub struct SystemGroups {
     pub groups: Vec<Group>,
 }
+
+/*impl Forensicable for Group {
+    fn to_activity(&self) -> Option<(i64, forensic_rs::activity::ForensicActivity)> {
+        None
+    }
+
+    fn to_timeline(&self) -> Option<(i64, forensic_rs::prelude::ForensicData)> {
+        
+    }
+}*/
 
 impl SystemGroups {
 

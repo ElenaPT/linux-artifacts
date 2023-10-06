@@ -1,4 +1,5 @@
 use chrono::NaiveDateTime;
+//use forensic_rs::traits::{vfs::VirtualFileSystem, forensic::Forensicable};
 use forensic_rs::traits::vfs::VirtualFileSystem;
 use std::{
     collections::{BTreeSet, HashMap},
@@ -18,6 +19,16 @@ pub struct BashRcConfig {
 pub struct BashHistory {
     pub commands: Vec<(Option<NaiveDateTime>, String)>,
 }
+
+/*impl Forensicable for BashHistory {
+    fn to_activity(&self) -> Option<(i64, forensic_rs::activity::ForensicActivity)> {
+        None
+    }
+
+    fn to_timeline(&self) -> Option<(i64, forensic_rs::prelude::ForensicData)> {
+        
+    }
+}*/
 
 impl BashHistory {
     //Reads the .bash_history with and modifies the BashHistory struct adding new commands
