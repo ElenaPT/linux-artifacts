@@ -11,3 +11,5 @@ chrono = "0.4"
 configparser = "3.0.2"
 forensic-rs = {workspace = true}
 frnsc-liveregistry-rs = {workspace = true}
+log = {workspace = true}
+log4rs = {workspace = true}
